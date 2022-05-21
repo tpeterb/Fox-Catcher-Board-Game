@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ResultViewController">
+   <children>
+      <TableView fx:id="scoreTable" prefHeight="319.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="playerOneColumn" prefWidth="137.0" text="Player One" />
+          <TableColumn fx:id="playerTwoColumn" prefWidth="132.0" text="Player Two" />
+            <TableColumn fx:id="winnerColumn" prefWidth="91.0" text="Winner" />
+            <TableColumn fx:id="numberOfMovesColumn" minWidth="0.0" prefWidth="72.0" text="Moves" />
+            <TableColumn fx:id="timeOfPlayColumn" prefWidth="167.0" text="Time of Play" />
+        </columns>
+      </TableView>
+      <Button fx:id="newGameButton" layoutX="244.0" layoutY="336.0" mnemonicParsing="false" onAction="#switchToStartView" text="New Game">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+   </children>
+</Pane>

@@ -1,0 +1,19 @@
+.root {
+
+}
+
+.square:hover {
+
+}
+
+.square.white {
+    -fx-background-color: white;
+}
+
+.square.dark {
+    -fx-background-color: black;
+}
+
+.square.white:hover, .square.dark:hover {
+    -fx-background-color: gold;
+}
