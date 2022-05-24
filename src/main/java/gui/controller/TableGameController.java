@@ -203,21 +203,17 @@ public class TableGameController {
         Position sourcePosition = new Position(rowIndex, columnIndex);
         Logger.info("A square was clicked at {}", sourcePosition.toString());
         if (!boardState.isSquareEmpty(sourcePosition)) {
-            if (!isCorrectPieceTypeClickedToMove(sourcePosition)) {
-                Logger.info("This type of piece can be moved on the next turn!");
-            } else {
-                positionOfPieceToMove = sourcePosition;
-                isPieceChosen = true;
-                Logger.debug("Piece chosen at {}", positionOfPieceToMove);
-            }
+            positionOfPieceToMove = sourcePosition;
+            isPieceChosen = true;
+            Logger.debug("Piece chosen at {}", positionOfPieceToMove);
         } else {
             if (isPieceChosen) {
                 Optional<Direction> directionToMoveIn = getDirectionFromClick(sourcePosition);
-                directionToMoveIn.ifPresentOrElse(direction -> {
-                    Logger.debug("The chosen direction is valid");
+                directionToMoveIn.ifPresent(direction -> {
+                    Logger.debug("The chosen direction exists");
                     makeMove(direction);
                     isPieceChosen = false;
-                }, () -> Logger.debug("The chosen direction is not among the existing directions!"));
+                });
             }
         }
     }

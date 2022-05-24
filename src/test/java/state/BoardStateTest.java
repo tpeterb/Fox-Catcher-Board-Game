@@ -51,7 +51,7 @@ class BoardStateTest {
 
     @Test
     void canMove() {
-        assertTrue(state1.canMove(0, Direction.DOWN_RIGHT));
+        assertFalse(state1.canMove(0, Direction.DOWN_RIGHT));
         assertFalse(state1.canMove(0, Direction.UP_LEFT));
         assertTrue(state1.canMove(1, Direction.UP_RIGHT));
         assertFalse(state1.canMove(4, Direction.DOWN_LEFT));

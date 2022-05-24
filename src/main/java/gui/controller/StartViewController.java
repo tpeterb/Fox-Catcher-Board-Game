@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -37,6 +38,15 @@ public class StartViewController {
     public void switchToMainView(ActionEvent actionEvent) throws IOException {
         String playerOneName = playerOneTextField.getText();
         String playerTwoName = playerTwoTextField.getText();
+        if (playerOneName == "" || playerTwoName == "") {
+            Logger.info("At least one player's name has not been given!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information");
+            alert.setHeaderText("Please fill in all the fields!");
+            alert.setContentText("At least one player's name has not been given! Please enter both player's name!");
+            alert.showAndWait();
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainView.fxml"));
         Parent root = loader.load();
         TableGameController gameController = loader.getController();

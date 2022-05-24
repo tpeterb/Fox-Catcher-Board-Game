@@ -212,6 +212,10 @@ public class BoardState implements Cloneable {
      * returns false.
      */
     private boolean canFoxMove(int index, Direction direction) {
+        if (this.pieceTypeToMove != PieceType.FOX) {
+            Logger.info("The fox can be moved on the next turn!");
+            return false;
+        }
         return switch (direction) {
             case UP_LEFT -> canMoveUpLeft(index);
             case UP_RIGHT -> canMoveUpRight(index);
@@ -230,6 +234,7 @@ public class BoardState implements Cloneable {
      */
     private boolean canDogMove(int index, Direction direction) {
         if (this.pieceTypeToMove != PieceType.DOG) {
+            Logger.info("The dog can be moved on the next turn!");
             return false;
         }
         return switch (direction) {
@@ -398,9 +403,25 @@ public class BoardState implements Cloneable {
      */
     public ArrayList<Direction> getPossibleMoves(int index) {
         ArrayList<Direction> directions = new ArrayList<Direction>();
-        for (var direction : Direction.values()) {
-            if (canMove(index, direction)) {
-                directions.add(direction);
+        if (index == this.getFoxIndex()) {
+            if (canMoveUpLeft(index)) {
+                directions.add(Direction.UP_LEFT);
+            }
+            if (canMoveUpRight(index)) {
+                directions.add(Direction.UP_RIGHT);
+            }
+            if (canMoveDownLeft(index)) {
+                directions.add(Direction.DOWN_LEFT);
+            }
+            if (canMoveDownRight(index)) {
+                directions.add(Direction.DOWN_RIGHT);
+            }
+        } else {
+            if (canMoveUpLeft(index)) {
+                directions.add(Direction.UP_LEFT);
+            }
+            if (canMoveUpRight(index)) {
+                directions.add(Direction.UP_RIGHT);
             }
         }
         return directions;
@@ -431,7 +452,6 @@ public class BoardState implements Cloneable {
      * @return True if the square at the given position is empty. Otherwise, this method
      * returns false;
      */
-
     public boolean isSquareEmpty(Position position) {
         for (var piece : pieces) {
             if (piece.getPosition().equals(position)) {
